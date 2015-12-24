@@ -30,6 +30,35 @@ FROM Cliente
 WHERE NIT = @NIT
 GO
 
+--WS04 ----------------------------------------------------------------------------------------
+CREATE PROCEDURE WS04 @IDFarmacia integer
+	,@IDMedicamento integer
+	,@Nombre varchar(128)
+	,@IDUsuario integer
+AS
+IF @IDMedicamento = 0 BEGIN
+	INSERT INTO Bitacora (Fecha,TipoTransaccion,Detalle,IDUsuario)
+	VALUES(SYSDATETIME()
+		,'Busqueda de medicamento'
+		,'Se realizo la busqueda del medicamento '+@Nombre
+		,@IDUsuario);
+	SELECT I.IDInventario,I.IDMedicamento,M.NombreComercial,M.NombreGenerico,M.Precio FROM Inventario I
+	INNER JOIN Medicamento M ON I.IDMEdicamento = M.IDMEdicamento
+	WHERE NombreComercial like '%'+@Nombre+'%'
+	OR NombreGenerico like '%'+@Nombre+'%';
+END
+ELSE BEGIN
+	INSERT INTO Bitacora (Fecha,TipoTransaccion,Detalle,IDUsuario)
+	VALUES(SYSDATETIME()
+		,'Busqueda de medicamento'
+		,'Se realizo la busqueda del medicamento con codigo '+@IDMedicamento
+		,@IDUsuario);
+	SELECT I.IDInventario,I.IDMedicamento,M.NombreComercial,M.NombreGenerico,M.Precio FROM Inventario I
+	INNER JOIN Medicamento M ON I.IDMEdicamento = M.IDMEdicamento
+	WHERE M.IDMEdicamento = @IDMedicamento;
+END
+GO
+
 --LogIn --------------------------------------------------------------------------------------
 
 CREATE PROCEDURE Ingresar @Nombre nvarchar(128), @Password nvarchar(128)
