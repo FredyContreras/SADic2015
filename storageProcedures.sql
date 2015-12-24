@@ -1,3 +1,22 @@
+--WS02 --------------------------------------------------------------------------------------
+CREATE PROCEDURE WS02 @NIT varchar(16)
+					,@Nombre varchar(128)
+					,@Telefono integer
+					,@Direccion varchar(128)
+					,@IDUsuario integer
+AS
+DECLARE @usuario varchar(128);
+SELECT @usuario = Nombre From Usuario where IDUsuario = @IDUsuario;
+INSERT INTO Cliente (NIT,Nombre,Telefono,Direccion)
+VALUES(@NIT,@Nombre,@Telefono,@Direccion);
+INSERT INTO Bitacora (Fecha,TipoTransaccion,Detalle,IDUsuario)
+VALUES(SYSDATETIME()
+	,'Creacion de cliente'
+	,'El usuario '+@Usuario+' agrego al cliente '+@Nombre
+	,@IDUsuario);
+SELECT @IDUsuario;
+GO
+
 --WS03 --------------------------------------------------------------------------------------
 
 CREATE PROCEDURE WS03 @NIT nvarchar(16), @IDUsuario integer
@@ -33,4 +52,5 @@ ELSE BEGIN
 	VALUES(SYSDATETIME(),'Ingreso de usuario','El usuario '+@Nombre+' intento ingresar al sistema sin exito',1);
 	SELECT 0;
 END
+GO
 
