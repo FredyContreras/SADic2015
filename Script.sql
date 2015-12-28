@@ -1,7 +1,7 @@
 CREATE
   TABLE Bitacora
   (
-    IDBitacora      INTEGER NOT NULL ,
+    IDBitacora      INTEGER IDENTITY(1,1) NOT NULL ,
     Fecha           DATETIME NOT NULL ,
     TipoTransaccion VARCHAR (32) NOT NULL ,
     Detalle         VARCHAR (256) NOT NULL ,
@@ -22,7 +22,7 @@ GO
 CREATE
   TABLE Cliente
   (
-    IDCliente INTEGER NOT NULL ,
+    IDCliente INTEGER IDENTITY(1,1) NOT NULL ,
     Nombre    VARCHAR (128) NOT NULL ,
     NIT       VARCHAR (16) NOT NULL ,
     Direccion VARCHAR (128) NOT NULL ,
@@ -42,7 +42,7 @@ GO
 CREATE
   TABLE Compra
   (
-    IDCompra   INTEGER NOT NULL ,
+    IDCompra   INTEGER IDENTITY(1,1) NOT NULL ,
     Fecha      DATETIME NOT NULL ,
     Destino    VARCHAR (128) NOT NULL ,
     Estado     VARCHAR (32) NOT NULL ,
@@ -66,7 +66,7 @@ GO
 CREATE
   TABLE DetalleCompra
   (
-    IDDetalle     INTEGER NOT NULL ,
+    IDDetalle     INTEGER IDENTITY(1,1) NOT NULL ,
     Cantidad      INTEGER NOT NULL ,
     IDCompra      INTEGER NOT NULL ,
     IDInventario  INTEGER NOT NULL ,
@@ -87,7 +87,7 @@ GO
 CREATE
   TABLE Farmacia
   (
-    IDFarmacia INTEGER NOT NULL ,
+    IDFarmacia INTEGER IDENTITY(1,1) NOT NULL ,
     Nombre     VARCHAR (64) NOT NULL ,
     Direccion  VARCHAR (128) NOT NULL
   )
@@ -106,7 +106,7 @@ GO
 CREATE
   TABLE Inventario
   (
-    IDInventario  INTEGER NOT NULL ,
+    IDInventario  INTEGER IDENTITY(1,1) NOT NULL ,
     Cantidad      INTEGER NOT NULL ,
     IDFarmacia    INTEGER NOT NULL ,
     IDMEdicamento INTEGER NOT NULL
@@ -126,7 +126,7 @@ GO
 CREATE
   TABLE Medicamento
   (
-    IDMEdicamento   INTEGER NOT NULL ,
+    IDMEdicamento   INTEGER IDENTITY(1,1) NOT NULL ,
     NombreComercial VARCHAR (128) NOT NULL ,
     NombreGenerico  VARCHAR (128) NOT NULL ,
     Precio          DECIMAL (8,2) NOT NULL
@@ -146,7 +146,7 @@ GO
 CREATE
   TABLE Usuario
   (
-    IDUsuario INTEGER NOT NULL ,
+    IDUsuario INTEGER IDENTITY(1,1) NOT NULL ,
     Nombre    VARCHAR (128) NOT NULL ,
     Rol       VARCHAR (64) NOT NULL ,
     Password  VARCHAR (16) NOT NULL
